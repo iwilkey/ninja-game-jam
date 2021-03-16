@@ -11,7 +11,7 @@ import com.mundanepixel.dinte.gfx.Renderer;
 public class Text {
     BitmapFont font;
     Color color;
-    int xx, yy;
+    public int xx, yy;
 
     public String message;
 

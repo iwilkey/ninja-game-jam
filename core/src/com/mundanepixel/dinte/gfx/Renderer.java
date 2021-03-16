@@ -8,6 +8,7 @@ import com.mundanepixel.dinte.state.State;
 public class Renderer {
 
     public static int DEFAULT_WIDTH, DEFAULT_HEIGHT;
+    public static float SCALEX, SCALEY;
     static SpriteBatch gfxBatch,
         guiBatch;
 
@@ -29,6 +30,11 @@ public class Renderer {
         guiBatch.begin();
         state.onGUI(guiBatch);
         guiBatch.end();
+    }
+
+    public void resize(int width, int height) {
+        SCALEX = (width / (float)DEFAULT_WIDTH);
+        SCALEY = (height / (float)DEFAULT_HEIGHT);
     }
 
     public void dispose() {

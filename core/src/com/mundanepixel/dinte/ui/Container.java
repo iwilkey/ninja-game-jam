@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mundanepixel.dinte.Settings;
+import com.mundanepixel.dinte.assets.Assets;
 import com.mundanepixel.dinte.gfx.Renderer;
 
 import java.util.ArrayList;
@@ -150,13 +151,14 @@ public class Container extends UIObject {
     @Override
     public void render(Batch b) {
         if(backgroundTexture == null) {
-            b.setColor(backgroundColor);
+            //b.setColor(backgroundColor);
+
             /*
             b.draw(Assets.SIGNAL, DEFAULT_COLLIDER.x,
                     DEFAULT_COLLIDER.y, DEFAULT_COLLIDER.width, DEFAULT_COLLIDER.height);
+            */
 
-             */
-            b.setColor(Color.WHITE);
+            // b.setColor(Color.WHITE);
         } else b.draw(backgroundTexture, DEFAULT_COLLIDER.x,
                 DEFAULT_COLLIDER.y, DEFAULT_COLLIDER.width, DEFAULT_COLLIDER.height);
         for(Container c : containers) c.render(b);

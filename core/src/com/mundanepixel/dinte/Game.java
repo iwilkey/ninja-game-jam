@@ -1,6 +1,7 @@
 package com.mundanepixel.dinte;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.mundanepixel.dinte.assets.Assets;
 import com.mundanepixel.dinte.clock.Clock;
 import com.mundanepixel.dinte.gfx.Renderer;
 import com.mundanepixel.dinte.state.GameState;
@@ -15,6 +16,9 @@ public class Game extends ApplicationAdapter {
 	public void create () {
 		renderer = new Renderer();
 		clock = new Clock();
+		Assets.init();
+		InputHandler.init();
+		Settings.init();
 		State.setState(new GameState());
 	}
 
@@ -26,6 +30,11 @@ public class Game extends ApplicationAdapter {
 	public void render () {
 		tick();
 		renderer.render(State.getCurrentState());
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		renderer.resize(width, height);
 	}
 	
 	@Override
