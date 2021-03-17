@@ -20,6 +20,10 @@ public class Assets {
     // Big Textures
     public static Texture ROOM_BASE, UI_BASE, SIGNAL,
         DOOR_LEFT, DOOR_RIGHT;
+    // Levels
+        // Room one
+        public static Texture ROOM_ONE_BASE, ROOM_ONE_DEC;
+        public static Animation ROOM_ONE_ANIMATION;
     // Components
 
     // Screen
@@ -36,7 +40,10 @@ public class Assets {
 
     // Animations
     // Player animations
-        // [0][] = Player walk right
+        // [0][] = Player walk right (216 275)
+        // [1][] = Player walk left
+        // [2][] = Player idle right (178 222)
+        // [3][] = Player idle left
     public static ArrayList<Animation> playerAnimations;
 
     public static void init() {
@@ -50,6 +57,12 @@ public class Assets {
         SIGNAL = new Texture("textures/ui/signal.png");
         DOOR_LEFT = new Texture("textures/room/objects/doorLeft.png");
         DOOR_RIGHT = new Texture("textures/room/objects/doorRight.png");
+
+        // Levels
+            // Room One
+        ROOM_ONE_BASE = new Texture("textures/room/one/terrainOne.png");
+        ROOM_ONE_DEC = new Texture("textures/room/one/decorationsOne.png");
+        // Ask about size...
 
         // Components
 
@@ -70,13 +83,35 @@ public class Assets {
     private static void initAnimations() {
         // Player animations
         playerAnimations = new ArrayList<>();
-            // Walk right
+            // Walk right and left
         ArrayList<TextureRegion> playerWalkRight = new ArrayList<>();
+        ArrayList<TextureRegion> playerWalkLeft = new ArrayList<>();
         SpriteSheet playerWalkRightSheet = new SpriteSheet(new Texture(
                 "textures/player/walk/walkingRight.png"),
-                432, 550);
-        for(int i = 0; i < 30; i++)
+                216, 275);
+        SpriteSheet playerWalkLeftSheet = new SpriteSheet(new Texture(
+                "textures/player/walk/walkingLeft.png"),
+                216, 275);
+        for(int i = 0; i < 30; i++) {
             playerWalkRight.add(playerWalkRightSheet.crop(i, 0));
+            playerWalkLeft.add(playerWalkLeftSheet.crop(i, 0));
+        }
         playerAnimations.add(new Animation(playerWalkRight, (short)1));
+        playerAnimations.add(new Animation(playerWalkLeft, (short)1));
+            // Idle
+        ArrayList<TextureRegion> playerIdleRight = new ArrayList<>();
+        ArrayList<TextureRegion> playerIdleLeft = new ArrayList<>();
+        SpriteSheet playerIdleRightSheet = new SpriteSheet(new Texture(
+                "textures/player/walk/idleRight.png"),
+                178, 222);
+        SpriteSheet playerIdleLeftSheet = new SpriteSheet(new Texture(
+                "textures/player/walk/idleLeft.png"),
+                178, 222);
+        for(int i = 0; i < 30; i++) {
+            playerIdleRight.add(playerIdleRightSheet.crop(i, 0));
+            playerIdleLeft.add(playerIdleLeftSheet.crop(i, 0));
+        }
+        playerAnimations.add(new Animation(playerIdleRight, (short)1));
+        playerAnimations.add(new Animation(playerIdleLeft, (short)1));
     }
 }

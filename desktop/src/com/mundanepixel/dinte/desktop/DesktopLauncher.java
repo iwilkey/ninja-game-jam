@@ -8,13 +8,10 @@ import java.awt.*;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-
-		config.title = "Ninja Game Jam: Death Is Not The End";
-		config.height = size.height - 350;
+		config.title = "Deadline";
+		config.height = 900 - 350;
 		config.width = (int)(config.height * (16/9.0f));
-
 		new LwjglApplication(new Game(), config);
 	}
 }

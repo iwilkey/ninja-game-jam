@@ -12,7 +12,7 @@ import com.mundanepixel.dinte.level.puzzle.Puzzle;
 
 public class Room {
     protected int number;
-    protected EntityHandler entityHandler;
+    public EntityHandler entityHandler;
     protected Puzzle puzzle;
 
     Texture base;
@@ -29,6 +29,8 @@ public class Room {
                 (int)(0.2f * 432), (int)(0.2f * 550)));
         leftDoor = (Door) entityHandler.addEntity(new Door(true));
         rightDoor = (Door) entityHandler.addEntity(new Door(false));
+
+        puzzle.init(entityHandler);
         // entityHandler.addEntity(new Screen(200, 200, 3, 3));
     }
 
@@ -39,8 +41,8 @@ public class Room {
 
     public void render(Batch b) {
         b.draw(base, 0,0, Renderer.DEFAULT_WIDTH, Renderer.DEFAULT_HEIGHT);
-        entityHandler.render(b);
         puzzle.render(b);
+        entityHandler.render(b);
     }
 
     public void onGUI(Batch b) {

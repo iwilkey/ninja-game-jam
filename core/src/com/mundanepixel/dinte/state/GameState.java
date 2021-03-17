@@ -9,6 +9,7 @@ import com.mundanepixel.dinte.gfx.Renderer;
 import com.mundanepixel.dinte.level.Room;
 import com.mundanepixel.dinte.level.puzzle.BinaryCode;
 import com.mundanepixel.dinte.level.puzzle.Puzzle;
+import com.mundanepixel.dinte.level.puzzle.SimpleBinaryGuess;
 import com.mundanepixel.dinte.ui.Container;
 import com.mundanepixel.dinte.ui.Text;
 
@@ -30,16 +31,24 @@ public class GameState extends State {
         uiBase = Assets.UI_BASE;
         initUI();
         rooms = new ArrayList<>();
+
+        // Levels
+        addRoom(new SimpleBinaryGuess());
         addRoom(new BinaryCode(0));
+
+        // Reset
+        level = 0;
+        roomNum.message = "" + (level + 1);
+        roomNum.centerContainerX(roomNumberContainer);
     }
 
+    public static final Color tC = new Color(93 / 255f, 155 /255f, 121 / 255f, 1.0f);
     private void initUI() {
         roomNumberContainer = new Container(700, 118, 102, 70);
         roomNum = roomNumberContainer.addText(new Text("1032"));
         roomNum.centerContainerX(roomNumberContainer);
         roomNum.centerContainerY(roomNumberContainer);
         roomNum.setY(roomNum.yy - 12);
-        Color tC = new Color(93 / 255f, 155 /255f, 121 / 255f, 1.0f);
         roomNum.setColor(tC);
 
 
@@ -59,18 +68,28 @@ public class GameState extends State {
         rooms.add(new Room(level, puzzle));
     }
 
+    public void progress() {
+        level++;
+        roomNum.message = "" + (level + 1);
+        roomNum.centerContainerX(roomNumberContainer);
+    }
+
     @Override
     public void tick() {
         timer();
         if(rooms.size() != 0)
-            rooms.get(level - 1).tick();
+            rooms.get(level).tick();
     }
 
+    final Color screenBlack = new Color(23 / 255f, 24 / 255f, 25 / 255f, 1);
     @Override
     public void render(Batch b) {
         b.draw(uiBase, 0,0, Renderer.DEFAULT_WIDTH, Renderer.DEFAULT_HEIGHT);
         if(rooms.size() != 0)
-            rooms.get(level - 1).render(b);
+            rooms.get(level).render(b);
+        b.setColor(screenBlack);
+        b.draw(Assets.SIGNAL, 0, Renderer.DEFAULT_HEIGHT - 37, Renderer.DEFAULT_WIDTH, 40);
+        b.setColor(Color.WHITE);
     }
 
     @Override
@@ -79,7 +98,7 @@ public class GameState extends State {
         clockContainer.render(b);
         dialogContainer.render(b);
         if(rooms.size() != 0)
-            rooms.get(level - 1).onGUI(b);
+            rooms.get(level).onGUI(b);
     }
 
     long then, now = System.nanoTime(),
