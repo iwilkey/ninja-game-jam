@@ -14,22 +14,21 @@ public class EntityHandler {
         entities = new ArrayList<>();
         this.room = room;
     }
-
     public Entity addEntity(Entity e) {
         entities.add(e);
         return e;
     }
-
     public void removeEntity(Entity e) {
         entities.remove(e);
     }
-
     public void tick() {
         for(Entity e : entities) e.tick();
     }
-
     public void render(Batch b) {
-        for(Entity e : entities) e.render(b);
-    }
+        for(Entity e : entities)
+            if(e instanceof Object) e.render(b);
+        for(Entity e : entities)
+            if(!(e instanceof Object)) e.render(b);
 
+    }
 }

@@ -39,14 +39,19 @@ public class GameState extends State {
         roomNum.centerContainerX(roomNumberContainer);
         roomNum.centerContainerY(roomNumberContainer);
         roomNum.setY(roomNum.yy - 12);
+        Color tC = new Color(93 / 255f, 155 /255f, 121 / 255f, 1.0f);
+        roomNum.setColor(tC);
+
 
         clockContainer = new Container(700, 40, 102, 70);
         timerText = clockContainer.addText(new Text("30:00"));
         timerText.centerContainerX(clockContainer);
         timerText.centerContainerY(clockContainer);
+        timerText.setColor(tC);
 
         dialogContainer = new Container(210, 60, 450, 100);
-        dialogText = dialogContainer.addText(new Text("Can you solve my code?"));
+        dialogText = dialogContainer.addText(new Text(Assets.ROOM_DIALOG[level]));
+        dialogText.setColor(tC);
     }
 
     public void addRoom(Puzzle puzzle) {

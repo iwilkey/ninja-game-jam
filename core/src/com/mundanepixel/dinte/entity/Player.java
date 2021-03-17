@@ -1,7 +1,7 @@
 package com.mundanepixel.dinte.entity;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 import com.mundanepixel.dinte.InputHandler;
 import com.mundanepixel.dinte.assets.Assets;
 import com.mundanepixel.dinte.gfx.Animation;
